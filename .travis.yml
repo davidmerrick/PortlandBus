@@ -5,8 +5,6 @@ branches:
   - prd
 install:
   - ./gradlew build
-before_deploy:
-- ls $TRAVIS_BUILD_DIR/build/distributions
 deploy:
   - provider: lambda
     skip_cleanup: true
@@ -15,7 +13,7 @@ deploy:
     role: $LAMBDA_ROLE
     runtime: java8
     handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-    zip: ${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus-Java.zip"
     on:
       branch: prd
   - provider: lambda
@@ -25,7 +23,7 @@ deploy:
     role: $LAMBDA_ROLE
     runtime: java8
     handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-    zip: ${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus-Java.zip"
     on:
       branch: stg
 
