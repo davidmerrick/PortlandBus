@@ -13,7 +13,7 @@ deploy:
     role: $LAMBDA_ROLE
     runtime: java8
     handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-    zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
+    zip: build/distributions/portlandbus-java.zip
     on:
       branch: prd
   - provider: lambda
@@ -23,7 +23,7 @@ deploy:
     role: $LAMBDA_ROLE
     runtime: java8
     handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-    zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
+    zip: build/distributions/portlandbus-java.zip
     on:
       branch: stg
 
