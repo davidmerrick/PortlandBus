@@ -3,34 +3,28 @@ branches:
   only:
   - stg
   - prd
-jobs:
-  include:
-  - stage: build
-    script: ./gradlew build
-  - stage: deploy
-    script: skip
-    deploy:
-      - provider: lambda
-        function_name: PortlandBus-prd
-        region: us-west-2
-        role: $LAMBDA_ROLE
-        runtime: java8
-        handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-        zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
-        on:
-          branch: prd
-      - provider: lambda
-        function_name: PortlandBus-stg
-        region: us-west-2
-        role: $LAMBDA_ROLE
-        runtime: java8
-        handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-        zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
-        on:
-          branch: stg
-
-before_deploy:
-- ./gradlew build
+install:
+  - ./gradlew build
+deploy:
+  skip_cleanup: true
+  - provider: lambda
+    function_name: PortlandBus-prd
+    region: us-west-2
+    role: $LAMBDA_ROLE
+    runtime: java8
+    handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
+    on:
+      branch: prd
+  - provider: lambda
+    function_name: PortlandBus-stg
+    region: us-west-2
+    role: $LAMBDA_ROLE
+    runtime: java8
+    handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
+    on:
+      branch: stg
 
 env:
   global:
