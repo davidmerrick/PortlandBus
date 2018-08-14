@@ -10,18 +10,25 @@ jobs:
   - stage: deploy
     script: skip
     deploy:
-      provider: lambda
-      function_name: PortlandBus-prd
-      region: us-west-2
-      role: "$LAMBDA_ROLE"
-      runtime: java8
-      handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-      zip: build/distributions/portlandbus-java.zip
-      on:
-        branches:
-          only:
-          - stg
-          - prd
+      - provider: lambda
+        function_name: PortlandBus-prd
+        region: us-west-2
+        role: $LAMBDA_ROLE
+        runtime: java8
+        handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
+        zip: build/distributions/portlandbus-java.zip
+        on:
+          branch: prd
+      - provider: lambda
+        function_name: PortlandBus-stg
+        region: us-west-2
+        role: $LAMBDA_ROLE
+        runtime: java8
+        handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
+        zip: build/distributions/portlandbus-java.zip
+        on:
+          branch: stg
+
 env:
   global:
   - secure: 0G3oHfGh4OEtpxV8wm6M8KTPJSBfF3VI2GqJyghgvFHj069pgksQ2WZz1H16lUlJ4Ymhiyn3Ywbk8cUshP33D9c1ki+uDtGk/h2qrPksM3lkvIVMi52eDJZnEq2bj3B2Wg65TSMhUjI1UKFTDfTic7MYkfyrjg2N+0iLsIStET6SvmhO41D0PPrDD0Jjom4NWEOGqaTFQFB6TYil7KbYKX5fxw/cTU7BUhSXAJLMAYtWOlLd+90sZya+lTfDOptWye9yIsKzkIMlSiFLxYF458fA8mC8oI55h6BgovDMO4IYG2lJmmLsuc2bZ2B0EMTVVQsfv0htsot5F5KTsFZHlTxSKlaXvYvZqq6mGzPZJ86leIm+0u5pklNQaIqH+2A4/051ZpRPKD1rD+UjQIHMUl5lgeEryUyDT0THpC13wibg0VF6B+OvplopWh3Yj84w17oPoie7vWDfryeSPsXGGJ2/vcXBc49wrMFp6+ZQBZh1oJTGEWn5tmYq1FIct1Eq3+eZiJiO/1o5Pd1z4BqgTwqAIGVBvIPG5vtszgV+o8+zhsnG9UoGaHdQ3mpMPK6g87ZgwUIUagIkVuoqQMft1EbQ2vlY2LxOvnfidbbrAMBVGCHM3B6Zxkfwir1tFZjhGppWxvofufpaDX7+EZqOanoYfMcvOyN4KQMIasBPiJo=
