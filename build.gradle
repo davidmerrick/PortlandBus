@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'com.amazon.alexa:ask-sdk:2.4.1',
+            'org.projectlombok:lombok:1.18.2',
+            'org.testng:testng:6.14.3',
+            'com.google.guava:guava:25.1-jre',
+            'ch.qos.logback:logback-core:1.2.3',
+            'com.squareup.okhttp3:okhttp:3.11.0',
+            'javax.inject:javax.inject:1',
+            'com.google.inject:guice:4.2.0'
+    )
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.compileClasspath
+    }
+}
+
+build.dependsOn buildZip
