@@ -6,8 +6,8 @@ branches:
 install:
   - ./gradlew build
 deploy:
-  skip_cleanup: true
   - provider: lambda
+    skip_cleanup: true
     function_name: PortlandBus-prd
     region: us-west-2
     role: $LAMBDA_ROLE
@@ -17,6 +17,7 @@ deploy:
     on:
       branch: prd
   - provider: lambda
+    skip_cleanup: true
     function_name: PortlandBus-stg
     region: us-west-2
     role: $LAMBDA_ROLE
