@@ -6,9 +6,9 @@ branches:
 jobs:
   include:
   - stage: build
-    script: "./gradlew build"
+    script: ./gradlew build
   - stage: deploy
-    script: "./gradlew build"
+    script: skip
     deploy:
       - provider: lambda
         function_name: PortlandBus-prd
@@ -28,6 +28,9 @@ jobs:
         zip: "${TRAVIS_BUILD_DIR}/build/distributions/portlandbus-java.zip"
         on:
           branch: stg
+
+before_deploy:
+- ./gradlew build
 
 env:
   global:
