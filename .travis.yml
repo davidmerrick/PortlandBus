@@ -16,7 +16,7 @@ jobs:
         role: $LAMBDA_ROLE
         runtime: java8
         handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-        zip: build/distributions/portlandbus-java.zip
+        zip: ./build/distributions/portlandbus-java.zip
         on:
           branch: prd
       - provider: lambda
@@ -25,7 +25,7 @@ jobs:
         role: $LAMBDA_ROLE
         runtime: java8
         handler_name: com.merricklabs.portlandbus.PortlandBusStreamHandler
-        zip: build/distributions/portlandbus-java.zip
+        zip: ./build/distributions/portlandbus-java.zip
         on:
           branch: stg
 
