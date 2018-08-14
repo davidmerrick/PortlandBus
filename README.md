@@ -1,4 +1,4 @@
-Hello World Alexa Skill written in Java
+Portland Bus Alexa Skill written in Java
 
 # Based on:
 - https://alexa-skills-kit-sdk-for-java.readthedocs.io/en/latest/Developing-Your-First-Skill.html
