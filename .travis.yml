@@ -6,7 +6,7 @@ branches:
 install:
   - ./gradlew build
 before_deploy:
-- ls ${$TRAVIS_BUILD_DIR}
+- ls $$TRAVIS_BUILD_DIR
 deploy:
   - provider: lambda
     skip_cleanup: true
