@@ -1,0 +1,18 @@
+language: java
+branches:
+  only:
+  - stg
+  - prd
+jobs:
+  include:
+    - stage: build
+      script: ./gradlew build
+    - stage: deploy
+      script: skip
+      deploy: &lambda
+        provider: lambda
+        function_name: $LAMBDA_NAME
+        region: "us-west-2"
+        role: $LAMBDA_ROLE
+        runtime: "java8"
+        handler_name: "com.merricklabs.portlandbus.PortlandBusStreamHandler"
