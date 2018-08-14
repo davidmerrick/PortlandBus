@@ -14,4 +14,4 @@ Set the `SKILL_ID` environment variable to the one belonging to your skill.
 
 # Running locally
 
-Use https://github.com/localstack/localstack.
+Use https://github.com/localstack/localstack to mock out the DynamoDB endpoints.
