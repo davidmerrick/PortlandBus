@@ -1,6 +1,5 @@
 package com.merricklabs.portlandbus;
 
-import com.google.inject.AbstractModule;
 import javax.inject.Singleton;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,7 @@ import lombok.Value;
 @Value
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
-public class PortlandBusConfig extends AbstractModule {
-
-    @Override
-    protected void configure(){}
+public class PortlandBusConfig {
 
     @Value
     public class Trimet {

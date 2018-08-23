@@ -6,6 +6,7 @@ import com.amazon.ask.model.Response;
 import com.google.inject.Inject;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import com.merricklabs.portlandbus.external.trimet.TrimetClient;
+import com.merricklabs.portlandbus.external.trimet.TrimetClientImpl;
 import com.merricklabs.portlandbus.models.ArrivalListPronouncer;
 import com.merricklabs.portlandbus.utils.SkillsHelper;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class GetArrivalsIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
 
         try {
-            int stopId = skillsHelper.getStopId(input).get();
+            int stopId = skillsHelper.getStopId(input).getAsInt();
             ArrivalListPronouncer pronouncer = new ArrivalListPronouncer(stopId, trimetClient.getArrivalsForStop(stopId));
             String speechText = pronouncer.pronounceArrivals();
             String displayText = pronouncer.showArrivals();

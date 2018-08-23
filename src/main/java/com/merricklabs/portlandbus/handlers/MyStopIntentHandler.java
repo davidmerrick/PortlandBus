@@ -2,17 +2,16 @@ package com.merricklabs.portlandbus.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.Response;
-import com.amazon.ask.model.Slot;
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import com.merricklabs.portlandbus.external.trimet.TrimetClient;
+import com.merricklabs.portlandbus.external.trimet.TrimetClientImpl;
 import com.merricklabs.portlandbus.models.ArrivalListPronouncer;
 import com.merricklabs.portlandbus.storage.MyStopStorage;
 import com.merricklabs.portlandbus.utils.SkillsHelper;
 import java.util.Optional;
+import java.util.OptionalInt;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -24,14 +23,12 @@ public class MyStopIntentHandler implements RequestHandler {
     private final TrimetClient trimetClient;
     private final PortlandBusConfig config;
     private final MyStopStorage storage;
-    private final SkillsHelper skillsHelper;
 
     @Inject
-    public MyStopIntentHandler(TrimetClient trimetClient, PortlandBusConfig config, MyStopStorage storage, SkillsHelper skillsHelper) {
+    public MyStopIntentHandler(TrimetClient trimetClient, PortlandBusConfig config, MyStopStorage storage) {
         this.trimetClient = trimetClient;
         this.config = config;
         this.storage = storage;
-        this.skillsHelper = skillsHelper;
     }
 
     @Override
@@ -42,12 +39,12 @@ public class MyStopIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String userId = input.getRequestEnvelope().getSession().getUser().getUserId();
-        Optional<Integer> stopIdQuery = storage.queryStopId(userId);
+        OptionalInt stopIdQuery = storage.queryStopId(userId);
         if (!stopIdQuery.isPresent()) {
             return noStopSaved(input);
         }
 
-        final int stopId = stopIdQuery.get();
+        final int stopId = stopIdQuery.getAsInt();
         try {
             ArrivalListPronouncer pronouncer = new ArrivalListPronouncer(stopId, trimetClient.getArrivalsForStop(stopId));
             String speechText = pronouncer.pronounceArrivals();
