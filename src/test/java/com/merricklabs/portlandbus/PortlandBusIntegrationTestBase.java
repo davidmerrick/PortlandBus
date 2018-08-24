@@ -2,6 +2,7 @@ package com.merricklabs.portlandbus;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.merricklabs.portlandbus.mocks.MockMyStopStorage;
 import com.merricklabs.portlandbus.mocks.MockTrimetClient;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -23,7 +24,7 @@ public class PortlandBusIntegrationTestBase {
     }
 
     private void resetMocks() {
-        MockTrimetClient mockTrimetClient = injector.getInstance(MockTrimetClient.class);
-        mockTrimetClient.reset();
+        injector.getInstance(MockTrimetClient.class).reset();
+        injector.getInstance(MockMyStopStorage.class).reset();
     }
 }

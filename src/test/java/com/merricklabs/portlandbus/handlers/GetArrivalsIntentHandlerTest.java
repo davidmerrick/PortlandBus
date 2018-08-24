@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 import static com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INTENT;
 import static com.merricklabs.portlandbus.testutil.TestConstants.INTEGRATION_GROUP;
+import static com.merricklabs.portlandbus.testutil.TestData.STOP_ID;
 import static com.merricklabs.portlandbus.testutil.TestData.USER_ID;
 import static org.testng.Assert.assertTrue;
 
@@ -26,20 +27,18 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
 
     @Test(groups = INTEGRATION_GROUP)
     public void getNextArrivals(){
-        final int stopId = 10791;
-
         // Initialize mock trimet client
-        List<Arrival> dummyArrivals = MockTrimetClient.getDummyArrivals(stopId, 5);
+        List<Arrival> dummyArrivals = MockTrimetClient.getDummyArrivals(STOP_ID, 5);
         MockTrimetClient mockTrimetClient = injector.getInstance(MockTrimetClient.class);
         mockTrimetClient.setArrivals(dummyArrivals);
 
-        HandlerInput input = getValidInput(stopId);
+        HandlerInput input = getValidInput(STOP_ID);
         GetArrivalsIntentHandler handler = injector.getInstance(GetArrivalsIntentHandler.class);
         Optional<Response> responseOptional = handler.handle(input);
         assertTrue(responseOptional.isPresent());
         String speechText = responseOptional.get().getOutputSpeech().toString();
         assertTrue(speechText.contains("Next arrivals at stop"));
-        assertTrue(speechText.contains(String.valueOf(stopId)));
+        assertTrue(speechText.contains(String.valueOf(STOP_ID)));
         assertTrue(speechText.contains(", and bus"));
     }
 
