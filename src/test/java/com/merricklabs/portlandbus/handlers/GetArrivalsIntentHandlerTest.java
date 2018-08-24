@@ -45,7 +45,12 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
 
     @Test(groups = INTEGRATION_GROUP)
     public void testWithInvalidInput() {
-        throw new RuntimeException("Testing travis yaml");
+        HandlerInput input = getInvalidInput();
+        GetArrivalsIntentHandler handler = injector.getInstance(GetArrivalsIntentHandler.class);
+        Optional<Response> responseOptional = handler.handle(input);
+        assertTrue(responseOptional.isPresent());
+        String speechText = responseOptional.get().getOutputSpeech().toString();
+        assertTrue(speechText.contains("Sorry, there was a problem getting arrivals for that stop."));
     }
 
     private HandlerInput getValidInput(int stopId) {
@@ -53,6 +58,17 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
         return HandlerInputBuilder.builder()
                 .config(alexaConfig)
                 .slots(buildSlots(String.valueOf(stopId), alexaConfig))
+                .intentName(GET_ARRIVALS_INTENT)
+                .userId(USER_ID)
+                .build()
+                .getHandlerInput();
+    }
+
+    private HandlerInput getInvalidInput() {
+        PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
+        return HandlerInputBuilder.builder()
+                .config(alexaConfig)
+                .slots(buildSlots("", alexaConfig))
                 .intentName(GET_ARRIVALS_INTENT)
                 .userId(USER_ID)
                 .build()
