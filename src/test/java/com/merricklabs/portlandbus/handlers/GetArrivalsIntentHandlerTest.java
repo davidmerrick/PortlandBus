@@ -43,6 +43,11 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
         assertTrue(speechText.contains(", and bus"));
     }
 
+    @Test(groups = INTEGRATION_GROUP)
+    public void testWithInvalidInput() {
+        throw new RuntimeException("Testing travis yaml");
+    }
+
     private HandlerInput getValidInput(int stopId) {
         PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
         return HandlerInputBuilder.builder()
