@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Singleton;
 import com.merricklabs.portlandbus.external.trimet.TrimetClient;
 import com.merricklabs.portlandbus.external.trimet.models.Arrival;
+import com.sun.org.glassfish.external.statistics.annotations.Reset;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -16,7 +17,7 @@ import lombok.Setter;
 import static java.util.stream.Collectors.toList;
 
 @Singleton
-public class MockTrimetClient implements TrimetClient {
+public class MockTrimetClient implements TrimetClient, TestMock {
 
     private static final Random random = new Random();
 
@@ -28,6 +29,7 @@ public class MockTrimetClient implements TrimetClient {
         return arrivals;
     }
 
+    @Reset
     public void reset(){
         arrivals = ImmutableList.of();
     }

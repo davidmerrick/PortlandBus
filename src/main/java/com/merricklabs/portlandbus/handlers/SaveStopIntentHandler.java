@@ -15,14 +15,14 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.merricklabs.portlandbus.constants.PortlandBusIntents.SAVE_STOP_INTENT;
 
 @Slf4j
-public class SaveStopHandler implements RequestHandler {
+public class SaveStopIntentHandler implements RequestHandler {
 
     private final PortlandBusConfig config;
     private final SkillsHelper skillsHelper;
     private final MyStopStorage storage;
 
     @Inject
-    public SaveStopHandler(PortlandBusConfig config, SkillsHelper skillsHelper, MyStopStorage myStopStorage) {
+    public SaveStopIntentHandler(PortlandBusConfig config, SkillsHelper skillsHelper, MyStopStorage myStopStorage) {
         this.config = config;
         this.skillsHelper = skillsHelper;
         this.storage = myStopStorage;

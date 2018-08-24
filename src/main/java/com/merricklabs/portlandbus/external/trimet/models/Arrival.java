@@ -42,7 +42,7 @@ public class Arrival {
         // Lazily init time
         if (time == null) {
             time = estimated != null ? convertDate(estimated) : convertDate(scheduled);
-            log.info("Set time of this arrival to {}", time);
+            log.debug("Set time of this arrival to {}", time);
         }
 
         return time;

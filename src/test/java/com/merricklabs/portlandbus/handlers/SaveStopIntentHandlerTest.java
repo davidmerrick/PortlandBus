@@ -7,69 +7,60 @@ import com.amazon.ask.model.SlotConfirmationStatus;
 import com.google.common.collect.ImmutableMap;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import com.merricklabs.portlandbus.PortlandBusIntegrationTestBase;
-import com.merricklabs.portlandbus.external.trimet.models.Arrival;
-import com.merricklabs.portlandbus.mocks.MockTrimetClient;
 import com.merricklabs.portlandbus.testutil.HandlerInputBuilder;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
-import static com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INTENT;
+import static com.merricklabs.portlandbus.constants.PortlandBusIntents.SAVE_STOP_INTENT;
 import static com.merricklabs.portlandbus.testutil.TestConstants.INTEGRATION_GROUP;
 import static com.merricklabs.portlandbus.testutil.TestData.STOP_ID;
 import static com.merricklabs.portlandbus.testutil.TestData.USER_ID;
 import static org.testng.Assert.assertTrue;
 
-@Slf4j
-public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase {
+public class SaveStopIntentHandlerTest extends PortlandBusIntegrationTestBase {
 
     @Test(groups = INTEGRATION_GROUP)
-    public void getNextArrivals(){
-        // Initialize mock trimet client
-        List<Arrival> dummyArrivals = MockTrimetClient.getDummyArrivals(STOP_ID, 5);
-        MockTrimetClient mockTrimetClient = injector.getInstance(MockTrimetClient.class);
-        mockTrimetClient.setArrivals(dummyArrivals);
-
-        HandlerInput input = getValidInput(STOP_ID);
-        GetArrivalsIntentHandler handler = injector.getInstance(GetArrivalsIntentHandler.class);
+    public void saveStop() {
+        HandlerInput input = getValidInput(USER_ID, String.valueOf(STOP_ID));
+        SaveStopIntentHandler handler = injector.getInstance(SaveStopIntentHandler.class);
         Optional<Response> responseOptional = handler.handle(input);
         assertTrue(responseOptional.isPresent());
+
         String speechText = responseOptional.get().getOutputSpeech().toString();
-        assertTrue(speechText.contains("Next arrivals at stop"));
+        assertTrue(speechText.contains("Saved stop"));
         assertTrue(speechText.contains(String.valueOf(STOP_ID)));
-        assertTrue(speechText.contains(", and bus"));
     }
 
     @Test(groups = INTEGRATION_GROUP)
-    public void testWithInvalidInput() {
-        HandlerInput input = getInvalidInput();
-        GetArrivalsIntentHandler handler = injector.getInstance(GetArrivalsIntentHandler.class);
+    public void stopNotSpecified() {
+        HandlerInput input = getInvalidInput(USER_ID);
+        SaveStopIntentHandler handler = injector.getInstance(SaveStopIntentHandler.class);
         Optional<Response> responseOptional = handler.handle(input);
         assertTrue(responseOptional.isPresent());
+
         String speechText = responseOptional.get().getOutputSpeech().toString();
-        assertTrue(speechText.contains("Sorry, there was a problem getting arrivals for that stop."));
+        assertTrue(speechText.contains("Please specify a stop to save."));
     }
 
-    private HandlerInput getValidInput(int stopId) {
+    private HandlerInput getValidInput(String userId, String stopId) {
         PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
         return HandlerInputBuilder.builder()
                 .config(alexaConfig)
                 .slots(buildSlots(String.valueOf(stopId), alexaConfig))
-                .intentName(GET_ARRIVALS_INTENT)
-                .userId(USER_ID)
+                .intentName(SAVE_STOP_INTENT)
+                .userId(userId)
                 .build()
                 .getHandlerInput();
     }
 
-    private HandlerInput getInvalidInput() {
+    private HandlerInput getInvalidInput(String userId) {
         PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
         return HandlerInputBuilder.builder()
                 .config(alexaConfig)
-                .slots(buildSlots("", alexaConfig))
-                .intentName(GET_ARRIVALS_INTENT)
-                .userId(USER_ID)
+                .intentName(SAVE_STOP_INTENT)
+                .slots(ImmutableMap.of())
+                .userId(userId)
                 .build()
                 .getHandlerInput();
     }

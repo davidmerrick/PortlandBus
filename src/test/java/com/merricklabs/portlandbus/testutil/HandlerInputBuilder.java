@@ -1,13 +1,12 @@
 package com.merricklabs.portlandbus.testutil;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import com.amazon.ask.model.Context;
 import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.RequestEnvelope;
+import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.model.User;
-import com.amazon.ask.model.interfaces.system.SystemState;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import java.util.Map;
 import lombok.Builder;
@@ -42,18 +41,14 @@ public class HandlerInputBuilder {
                 .withIntent(intent)
                 .build();
 
-        SystemState systemState = SystemState.builder()
+        Session session = Session.builder()
                 .withUser(User.builder().withUserId(userId).build())
-                .build();
-
-        Context context = Context.builder()
-                .withSystem(systemState)
                 .build();
 
         RequestEnvelope requestEnvelope = RequestEnvelope.builder()
                 .withVersion("1.0")
                 .withRequest(intentRequest)
-                .withContext(context)
+                .withSession(session)
                 .build();
 
         return HandlerInput.builder()

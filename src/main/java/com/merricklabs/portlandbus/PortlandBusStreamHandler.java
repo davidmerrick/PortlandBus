@@ -11,7 +11,7 @@ import com.merricklabs.portlandbus.handlers.GetArrivalsIntentHandler;
 import com.merricklabs.portlandbus.handlers.HelpIntentHandler;
 import com.merricklabs.portlandbus.handlers.LaunchRequestHandler;
 import com.merricklabs.portlandbus.handlers.MyStopIntentHandler;
-import com.merricklabs.portlandbus.handlers.SaveStopHandler;
+import com.merricklabs.portlandbus.handlers.SaveStopIntentHandler;
 import com.merricklabs.portlandbus.handlers.SessionEndedRequestHandler;
 
 public class PortlandBusStreamHandler extends SkillStreamHandler {
@@ -23,7 +23,7 @@ public class PortlandBusStreamHandler extends SkillStreamHandler {
         return Skills.standard()
                 .addRequestHandlers(
                         injector.getInstance(LaunchRequestHandler.class),
-                        injector.getInstance(SaveStopHandler.class),
+                        injector.getInstance(SaveStopIntentHandler.class),
                         injector.getInstance(GetArrivalsIntentHandler.class),
                         injector.getInstance(MyStopIntentHandler.class),
                         injector.getInstance(CancelandStopIntentHandler.class),
