@@ -33,14 +33,7 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
         MockTrimetClient mockTrimetClient = injector.getInstance(MockTrimetClient.class);
         mockTrimetClient.setArrivals(dummyArrivals);
 
-        PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
-        HandlerInput input = HandlerInputBuilder.builder()
-                .config(alexaConfig)
-                .slots(buildSlots(String.valueOf(stopId), alexaConfig))
-                .intentName(GET_ARRIVALS_INTENT)
-                .userId(USER_ID)
-                .build()
-                .getHandlerInput();
+        HandlerInput input = getValidInput(stopId);
         GetArrivalsIntentHandler handler = injector.getInstance(GetArrivalsIntentHandler.class);
         Optional<Response> responseOptional = handler.handle(input);
         assertTrue(responseOptional.isPresent());
@@ -48,6 +41,17 @@ public class GetArrivalsIntentHandlerTest extends PortlandBusIntegrationTestBase
         assertTrue(speechText.contains("Next arrivals at stop"));
         assertTrue(speechText.contains(String.valueOf(stopId)));
         assertTrue(speechText.contains(", and bus"));
+    }
+
+    private HandlerInput getValidInput(int stopId) {
+        PortlandBusConfig.Alexa alexaConfig = injector.getInstance(PortlandBusConfig.class).getAlexa();
+        return HandlerInputBuilder.builder()
+                .config(alexaConfig)
+                .slots(buildSlots(String.valueOf(stopId), alexaConfig))
+                .intentName(GET_ARRIVALS_INTENT)
+                .userId(USER_ID)
+                .build()
+                .getHandlerInput();
     }
 
     private static Map<String, Slot> buildSlots(String stopIdString, PortlandBusConfig.Alexa alexaConfig) {
