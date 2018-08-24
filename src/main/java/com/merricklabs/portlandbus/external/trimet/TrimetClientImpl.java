@@ -2,6 +2,7 @@ package com.merricklabs.portlandbus.external.trimet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import com.merricklabs.portlandbus.external.trimet.models.Arrival;
 import com.merricklabs.portlandbus.external.trimet.models.ArrivalResults;
@@ -15,6 +16,7 @@ import okhttp3.Request;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
+@Singleton
 public class TrimetClientImpl implements TrimetClient {
 
     private static final ObjectMapper mapper = new ObjectMapper();
