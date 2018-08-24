@@ -4,7 +4,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.merricklabs.portlandbus.PortlandBusConfig;
-import com.merricklabs.portlandbus.storage.MyStopStorageImpl;
+import com.merricklabs.portlandbus.storage.MyStopStorage;
 import com.merricklabs.portlandbus.utils.SkillsHelper;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -15,14 +15,14 @@ import static com.amazon.ask.request.Predicates.intentName;
 import static com.merricklabs.portlandbus.constants.PortlandBusIntents.SAVE_STOP_INTENT;
 
 @Slf4j
-public class SaveStopHandler implements RequestHandler {
+public class SaveStopIntentHandler implements RequestHandler {
 
     private final PortlandBusConfig config;
     private final SkillsHelper skillsHelper;
-    private final MyStopStorageImpl storage;
+    private final MyStopStorage storage;
 
     @Inject
-    public SaveStopHandler(PortlandBusConfig config, SkillsHelper skillsHelper, MyStopStorageImpl myStopStorage) {
+    public SaveStopIntentHandler(PortlandBusConfig config, SkillsHelper skillsHelper, MyStopStorage myStopStorage) {
         this.config = config;
         this.skillsHelper = skillsHelper;
         this.storage = myStopStorage;
