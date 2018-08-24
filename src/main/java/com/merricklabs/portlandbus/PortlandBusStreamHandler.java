@@ -17,7 +17,7 @@ import com.merricklabs.portlandbus.handlers.SessionEndedRequestHandler;
 public class PortlandBusStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
-        Injector injector = Guice.createInjector(new PortlandBusConfig());
+        Injector injector = Guice.createInjector(new PortlandBusModule());
         PortlandBusConfig config = injector.getInstance(PortlandBusConfig.class);
 
         return Skills.standard()

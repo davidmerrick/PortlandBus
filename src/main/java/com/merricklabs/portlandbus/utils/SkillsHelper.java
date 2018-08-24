@@ -7,6 +7,7 @@ import com.amazon.ask.model.Slot;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import com.merricklabs.portlandbus.models.ArrivalListPronouncer;
 import java.util.Optional;
+import java.util.OptionalInt;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,9 +21,9 @@ public class SkillsHelper {
         this.alexaConfig = config.getAlexa();
     }
 
-    public Optional<Integer> getStopId(HandlerInput input) {
+    public OptionalInt getStopId(HandlerInput input) {
         String slotValue = getSlotValue(input, alexaConfig.getStopIdSlot());
-        return slotValue == null ? Optional.empty() : Optional.of(Integer.parseInt(slotValue));
+        return slotValue == null ? OptionalInt.empty() : OptionalInt.of(Integer.parseInt(slotValue));
     }
 
     private String getSlotValue(HandlerInput input, String slotName) throws IllegalArgumentException {

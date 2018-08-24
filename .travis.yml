@@ -5,6 +5,8 @@ branches:
   - prd
 install:
   - ./gradlew build
+test:
+  - ./gradlew test
 deploy:
   - provider: lambda
     skip_cleanup: true

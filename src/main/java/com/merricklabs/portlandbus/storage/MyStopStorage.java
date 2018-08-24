@@ -8,6 +8,7 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.merricklabs.portlandbus.PortlandBusConfig;
 import java.util.Optional;
+import java.util.OptionalInt;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,13 +48,13 @@ public class MyStopStorage {
         }
     }
 
-    public Optional<Integer> queryStopId(String userId) {
+    public OptionalInt queryStopId(String userId) {
         Item item = table.getItem(dynamoDbConfig.getUserIdKey(), userId);
 
         if (item == null) {
-            return Optional.empty();
+            return OptionalInt.empty();
         }
 
-        return Optional.of(item.getInt(dynamoDbConfig.getStopIdKey()));
+        return OptionalInt.of(item.getInt(dynamoDbConfig.getStopIdKey()));
     }
 }
