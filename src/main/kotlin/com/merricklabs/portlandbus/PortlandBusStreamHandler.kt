@@ -1,26 +1,27 @@
 package com.merricklabs.portlandbus
 
+import com.amazon.ask.Skill
 import com.amazon.ask.SkillStreamHandler
+import com.amazon.ask.Skills
+import com.google.inject.Guice
+import com.merricklabs.portlandbus.handlers.CancelandStopIntentHandler
 
 class PortlandBusStreamHandler : SkillStreamHandler {
-    constructor() : super(getSkill())
 
-    fun getSkill() {
-        val injector = Guice.createInjector(PortlandBusModule())
-        val config = injector.getInstance(PortlandBusConfig::class.java)
+    companion object {
+        val skill: Skill
+            get() {
+                val injector = Guice.createInjector(PortlandBusModule())
+                val config = injector.getInstance(PortlandBusConfig::class)
 
-        return Skills.standard()
-                .addRequestHandlers(
-                        injector.getInstance(LaunchRequestHandler::class.java),
-                        injector.getInstance(SaveStopIntentHandler::class.java),
-                        injector.getInstance(GetArrivalsIntentHandler::class.java),
-                        injector.getInstance(MyStopIntentHandler::class.java),
-                        injector.getInstance(CancelandStopIntentHandler::class.java),
-                        injector.getInstance(HelpIntentHandler::class.java),
-                        injector.getInstance(SessionEndedRequestHandler::class.java),
-                        injector.getInstance(FallbackIntentHandler::class.java)
-                )
-                .withSkillId(config.getAlexa().getSkillId())
-                .build()
+                Skills.standard()
+                        .addRequestHandlers(
+                                injector.getInstance<CancelandStopIntentHandler>(CancelandStopIntentHandler::class)
+                        )
+                        .withSkillId(config.getAlexa().getSkillId())
+                        .build()
+            }
     }
+
+    constructor() : super(skill)
 }
