@@ -30,7 +30,8 @@ dependencies {
             'ch.qos.logback:logback-core:1.2.3',
             'com.squareup.okhttp3:okhttp:3.11.0',
             'javax.inject:javax.inject:1',
-            'org.koin:koin-core:1.0.1'
+            'org.koin:koin-core:1.0.1',
+            'io.github.microutils:kotlin-logging:1.6.10'
     )
 
     testCompile(
