@@ -41,7 +41,7 @@ class SkillsHelper : KoinComponent {
 
     fun savedStopResponse(input: HandlerInput, stopId: Int): Optional<Response> {
         log.info("Success: Saved stop $stopId")
-        val speechText = "Saved stop " + ArrivalListPronouncer.pronounceStop(stopId) + "."
+        val speechText = "Saved stop ${ArrivalListPronouncer.pronounceStop(stopId)}."
         val displayText = "Saved stop $stopId."
         return input.responseBuilder
                 .withSpeech(speechText)
