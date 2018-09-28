@@ -39,11 +39,11 @@ class ArrivalPronouncer(private val arrival: Arrival) {
      */
     fun pronounceForMultipleArrival(now: LocalDateTime): String {
         val minutesRemaining = getMinutesRemainingCache(now)
-        return "bus " + arrival.busId + " in " + minutesRemaining + " " + getMinutePronunciation(minutesRemaining)
+        return "bus ${arrival.busId} in $minutesRemaining ${getMinutePronunciation(minutesRemaining)}"
     }
 
     fun showNextArrival(now: LocalDateTime): String {
         val minutesRemaining = getMinutesRemainingCache(now)
-        return "Bus " + arrival.busId + ": " + minutesRemaining + " min"
+        return "Bus ${arrival.busId}: $minutesRemaining min"
     }
 }

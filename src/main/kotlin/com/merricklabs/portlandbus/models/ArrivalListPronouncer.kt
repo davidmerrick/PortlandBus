@@ -25,20 +25,20 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
     fun pronounceArrivals(): String {
         val now = LocalDateTime.now()
 
-        if (arrivalPronouncers.size == 0) {
-            return "No arrivals are currently scheduled for stop " + pronounceStop() + " in the next " + MAX_ARRIVAL_MINUTES + " minutes."
+        if (arrivalPronouncers.isEmpty()) {
+            return "No arrivals are currently scheduled for stop ${pronounceStop()} in the next $MAX_ARRIVAL_MINUTES minutes."
         }
 
-        val speechBuilder = StringBuilder("Next arrivals at stop " + pronounceStop() + ": ")
+        val speechBuilder = StringBuilder("Next arrivals at stop ${pronounceStop()}: ")
 
         if (arrivalPronouncers.size == 1) {
             speechBuilder.append(arrivalPronouncers[0].pronounceForMultipleArrival(now))
         } else {
             arrivalPronouncers.subList(0, arrivalPronouncers.size - 1)
                     .stream()
-                    .forEach { a -> speechBuilder.append(a.pronounceForMultipleArrival(now) + ", ") }
+                    .forEach { speechBuilder.append("${it.pronounceForMultipleArrival(now)}, ") }
 
-            speechBuilder.append("and " + arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now) + ".")
+            speechBuilder.append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now)}.")
         }
         return speechBuilder.toString()
     }
@@ -50,12 +50,12 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
     fun showArrivals(): String {
         val textBuilder = StringBuilder("Stop $stopId: \n")
 
-        if (arrivalPronouncers.size == 0) {
+        if (arrivalPronouncers.isEmpty()) {
             textBuilder.append("No arrivals")
         } else {
             arrivalPronouncers
                     .stream()
-                    .forEach { textBuilder.append(it.showNextArrival(now) + "\n") }
+                    .forEach { textBuilder.append("${it.showNextArrival(now)}\n") }
         }
         return textBuilder.toString()
     }

@@ -2,10 +2,13 @@ package com.merricklabs.portlandbus.external.trimet.models
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import mu.KotlinLogging
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit.MINUTES
 import java.util.*
+
+private val log = KotlinLogging.logger {}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Arrival(
@@ -30,7 +33,7 @@ class Arrival(
             // Lazily init time
             if (_time == null) {
                 _time = if (estimated != null) convertDate(estimated) else convertDate(scheduled)
-                // log.debug("Set time of this arrival to {}", time)
+                log.debug("Set time of this arrival to $_time.")
             }
             return _time ?: throw RuntimeException("Time should not be null.")
         }

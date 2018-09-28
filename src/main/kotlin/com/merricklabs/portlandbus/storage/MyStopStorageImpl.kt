@@ -6,9 +6,12 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.amazonaws.services.dynamodbv2.document.Table
 import com.merricklabs.portlandbus.PortlandBusConfig
+import mu.KotlinLogging
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.util.*
+
+private val log = KotlinLogging.logger {}
 
 class MyStopStorageImpl : MyStopStorage, KoinComponent {
 
@@ -31,7 +34,7 @@ class MyStopStorageImpl : MyStopStorage, KoinComponent {
     }
 
     override fun saveStop(userId: String, stopId: Int) {
-        // log.info("Saving stop {}", stopId)
+        log.info("Saving stop $stopId")
 
         val item = Item()
                 .withPrimaryKey(dynamoDbConfig.userIdKey, userId)
@@ -40,7 +43,7 @@ class MyStopStorageImpl : MyStopStorage, KoinComponent {
         try {
             table.putItem(item)
         } catch (e: Exception) {
-            // log.error(e.message, e)
+            log.error(e.message, e)
             throw RuntimeException(e)
         }
     }
