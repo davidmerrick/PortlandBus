@@ -8,7 +8,7 @@ import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INTENT
 import com.merricklabs.portlandbus.external.trimet.TrimetClient
 import com.merricklabs.portlandbus.models.ArrivalListPronouncer
-import com.merricklabs.portlandbus.utils.SkillsHelper
+import com.merricklabs.portlandbus.util.SkillsHelper
 import lombok.extern.slf4j.Slf4j
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject

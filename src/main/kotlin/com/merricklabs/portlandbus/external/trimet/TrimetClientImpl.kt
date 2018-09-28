@@ -32,14 +32,14 @@ class TrimetClientImpl : TrimetClient, KoinComponent {
             val response = client.newCall(request).execute()
             val results = mapper.readValue(response.body()!!.string(), ArrivalResults::class.java)
             // Todo: Reimplement logging
-//            log.info("Success: fetched {} arrivals from the TriMet API", results.resultSet.arrivals.size)
+            // log.info("Success: fetched {} arrivals from the TriMet API", results.resultSet.arrivals.size)
             return results.resultSet
                     .arrivals
                     .stream()
                     .filter { it.stopId == stopId }
                     .collect(toList())
         } catch (e: IOException) {
-//            log.error(e.message, e)
+            // log.error(e.message, e)
             throw RuntimeException(e)
         }
 

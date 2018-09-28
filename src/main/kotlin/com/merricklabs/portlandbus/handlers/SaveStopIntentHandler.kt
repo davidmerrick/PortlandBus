@@ -7,7 +7,7 @@ import com.amazon.ask.request.Predicates.intentName
 import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.SAVE_STOP_INTENT
 import com.merricklabs.portlandbus.storage.MyStopStorage
-import com.merricklabs.portlandbus.utils.SkillsHelper
+import com.merricklabs.portlandbus.util.SkillsHelper
 import lombok.extern.slf4j.Slf4j
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject

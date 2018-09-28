@@ -8,6 +8,7 @@ import com.merricklabs.portlandbus.external.trimet.TrimetClientImpl
 import com.merricklabs.portlandbus.handlers.*
 import com.merricklabs.portlandbus.storage.MyStopStorage
 import com.merricklabs.portlandbus.storage.MyStopStorageImpl
+import com.merricklabs.portlandbus.util.SkillsHelper
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.startKoin
 
@@ -18,6 +19,7 @@ class PortlandBusStreamHandler : SkillStreamHandler {
             get() {
                 val portlandBusModule = module {
                     single { PortlandBusConfig() }
+                    single { SkillsHelper() }
 
                     single { TrimetClientImpl() as TrimetClient }
                     single { MyStopStorageImpl() as MyStopStorage }
