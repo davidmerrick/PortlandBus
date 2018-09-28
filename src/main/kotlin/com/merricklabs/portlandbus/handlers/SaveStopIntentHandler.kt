@@ -16,9 +16,9 @@ import java.util.*
 @Slf4j
 class SaveStopIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
-    val skillsHelper by inject<SkillsHelper>()
-    val storage by inject<MyStopStorage>()
+    private val config by inject<PortlandBusConfig>()
+    private val skillsHelper by inject<SkillsHelper>()
+    private val storage by inject<MyStopStorage>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(SAVE_STOP_INTENT))

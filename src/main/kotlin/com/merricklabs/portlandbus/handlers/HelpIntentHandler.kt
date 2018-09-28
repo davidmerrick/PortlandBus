@@ -12,7 +12,7 @@ import java.util.*
 
 class HelpIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
+    private val config by inject<PortlandBusConfig>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(HELP_INTENT))

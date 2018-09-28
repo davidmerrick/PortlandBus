@@ -15,9 +15,9 @@ import java.util.*
 
 class MyStopIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
-    val storage by inject<MyStopStorage>()
-    val trimetClient by inject<TrimetClient>()
+    private val config by inject<PortlandBusConfig>()
+    private val storage by inject<MyStopStorage>()
+    private val trimetClient by inject<TrimetClient>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(MY_STOP_INTENT))

@@ -13,7 +13,7 @@ import java.util.*
 
 class CancelandStopIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
+    private val config by inject<PortlandBusConfig>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(CANCEL_INTENT).or(intentName(STOP_INTENT)))

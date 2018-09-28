@@ -17,9 +17,9 @@ import java.util.*
 @Slf4j
 class GetArrivalsIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
-    val trimetClient by inject<TrimetClient>()
-    val skillsHelper by inject<SkillsHelper>()
+    private val config by inject<PortlandBusConfig>()
+    private val trimetClient by inject<TrimetClient>()
+    private val skillsHelper by inject<SkillsHelper>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(GET_ARRIVALS_INTENT))

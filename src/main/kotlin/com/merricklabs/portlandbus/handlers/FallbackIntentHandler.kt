@@ -15,7 +15,7 @@ import java.util.*
 //              safely deployed for any locale.
 class FallbackIntentHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
+    private val config by inject<PortlandBusConfig>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(intentName(FALLBACK_INTENT))

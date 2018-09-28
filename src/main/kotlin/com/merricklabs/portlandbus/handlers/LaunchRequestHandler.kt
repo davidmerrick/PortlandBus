@@ -25,7 +25,7 @@ import java.util.*
 
 class LaunchRequestHandler : RequestHandler, KoinComponent {
 
-    val config by inject<PortlandBusConfig>()
+    private val config by inject<PortlandBusConfig>()
 
     override fun canHandle(input: HandlerInput): Boolean {
         return input.matches(requestType(LaunchRequest::class.java))
