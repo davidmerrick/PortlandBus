@@ -20,14 +20,8 @@ class PortlandBusConfig : KoinComponent {
     }
 
     inner class DynamoDb {
-        val endpoint: String = if (System.getenv("DYNAMODB_ENDPOINT") != null)
-            System.getenv("DYNAMODB_ENDPOINT")
-        else
-            "https://dynamodb.us-west-2.amazonaws.com"
-        val region: String = if (System.getenv("DYNAMODB_REGION") != null)
-            System.getenv("DYNAMODB_REGION")
-        else
-            "us-west-2"
+        val endpoint: String = System.getenv("DYNAMODB_ENDPOINT") ?: "https://dynamodb.us-west-2.amazonaws.com"
+        val region: String = System.getenv("DYNAMODB_REGION") ?: "us-west-2"
         val tableName: String = System.getenv("DYNAMODB_TABLE")
         val userIdKey = "UserId"
         val stopIdKey = "StopId"

@@ -34,11 +34,11 @@ class LaunchRequestHandler : RequestHandler, KoinComponent {
     override fun handle(input: HandlerInput): Optional<Response> {
         val repromptText = "Which stop would you like information about?"
         val INVOCATION_NAME = config.alexa.invocationName
-        val speechText = StringBuilder()
-                .append("Welcome to $INVOCATION_NAME. ")
-                .append("I can retrieve arrival times for bus stops in Portland, Oregon. ")
-                .append(repromptText)
-                .toString()
+        val speechText = """
+            Welcome to $INVOCATION_NAME. I can retrieve arrival times for bus stops in Portland, Oregon.
+            $repromptText
+        """.trimIndent()
+
         return input.responseBuilder
                 .withSpeech(speechText)
                 .withSimpleCard(INVOCATION_NAME, speechText)
