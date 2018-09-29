@@ -28,17 +28,16 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
             return "No arrivals are currently scheduled for stop ${pronounceStop()} in the next $MAX_ARRIVAL_MINUTES minutes."
         }
 
-        val speechBuilder = StringBuilder("Next arrivals at stop ${pronounceStop()}: ")
-
-        if (arrivalPronouncers.size == 1) {
-            speechBuilder.append(arrivalPronouncers[0].pronounceForMultipleArrival(now))
-        } else {
-            arrivalPronouncers.subList(0, arrivalPronouncers.size - 1)
-                    .forEach { speechBuilder.append("${it.pronounceForMultipleArrival(now)}, ") }
-
-            speechBuilder.append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now)}.")
+        return buildString {
+            append("Next arrivals at stop ${pronounceStop()}: ")
+            if (arrivalPronouncers.size == 1) {
+                append(arrivalPronouncers[0].pronounceForMultipleArrival(now))
+            } else {
+                arrivalPronouncers.subList(0, arrivalPronouncers.size - 1)
+                        .forEach { append("${it.pronounceForMultipleArrival(now)}, ") }
+                append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now)}.")
+            }
         }
-        return speechBuilder.toString()
     }
 
     /**
@@ -46,16 +45,15 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
      * @return
      */
     fun showArrivals(): String {
-        val textBuilder = StringBuilder("Stop $stopId: \n")
-
-        if (arrivalPronouncers.isEmpty()) {
-            textBuilder.append("No arrivals")
-        } else {
-            arrivalPronouncers
-                    .stream()
-                    .forEach { textBuilder.append("${it.showNextArrival(now)}\n") }
+        return buildString {
+            append("Stop $stopId: \n")
+            if (arrivalPronouncers.isEmpty()) {
+                append("No arrivals")
+            } else {
+                arrivalPronouncers
+                        .forEach { append("${it.showNextArrival(now)}\n") }
+            }
         }
-        return textBuilder.toString()
     }
 
     companion object {

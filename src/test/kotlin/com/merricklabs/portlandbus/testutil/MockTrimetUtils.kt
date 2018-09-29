@@ -7,16 +7,15 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Random
-import java.util.stream.Collectors.toList
-import java.util.stream.IntStream
 
 object MockTrimetUtils {
     private val random = Random()
 
     fun getDummyArrivals(stopId: Int, numArrivals: Int): List<Arrival> {
-        return IntStream.rangeClosed(1, numArrivals)
-                .mapToObj { getRandomArrival(stopId) }
-                .collect(toList())
+        return generateSequence(0) { it + 1 }
+                .takeWhile { it < numArrivals }
+                .map { getRandomArrival(stopId) }
+                .toList()
     }
 
     private fun getRandomArrival(stopId: Int): Arrival {
