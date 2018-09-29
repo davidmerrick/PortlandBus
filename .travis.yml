@@ -16,7 +16,7 @@ deploy:
     runtime: java8
     module_name: com.merricklabs.portlandbus
     handler_name: PortlandBusStreamHandler
-    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus-Java.zip"
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus.zip"
     memory_size: 512
     on:
       branch: prd
@@ -28,7 +28,7 @@ deploy:
     runtime: java8
     module_name: com.merricklabs.portlandbus
     handler_name: PortlandBusStreamHandler
-    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus-Java.zip"
+    zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus.zip"
     memory_size: 512
     on:
       branch: stg
