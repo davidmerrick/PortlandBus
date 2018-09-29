@@ -11,7 +11,7 @@ import com.merricklabs.portlandbus.models.ArrivalListPronouncer
 import com.merricklabs.portlandbus.util.SkillsHelper
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 class GetArrivalsIntentHandler : RequestHandler, KoinComponent {
 

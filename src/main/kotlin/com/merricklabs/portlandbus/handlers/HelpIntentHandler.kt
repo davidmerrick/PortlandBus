@@ -8,7 +8,7 @@ import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.HELP_INTENT
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 class HelpIntentHandler : RequestHandler, KoinComponent {
 

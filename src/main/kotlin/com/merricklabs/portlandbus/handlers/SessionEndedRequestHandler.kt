@@ -19,7 +19,7 @@ import com.amazon.ask.model.Response
 import com.amazon.ask.model.SessionEndedRequest
 import com.amazon.ask.request.Predicates.requestType
 import org.koin.standalone.KoinComponent
-import java.util.*
+import java.util.Optional
 
 class SessionEndedRequestHandler : RequestHandler, KoinComponent {
 

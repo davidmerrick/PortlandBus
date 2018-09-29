@@ -1,6 +1,6 @@
 package com.merricklabs.portlandbus.storage
 
-import java.util.*
+import java.util.OptionalInt
 
 interface MyStopStorage {
     fun saveStop(userId: String, stopId: Int)

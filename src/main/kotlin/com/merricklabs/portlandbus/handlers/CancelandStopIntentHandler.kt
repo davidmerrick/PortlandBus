@@ -9,7 +9,7 @@ import com.merricklabs.portlandbus.constants.PortlandBusIntents.CANCEL_INTENT
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.STOP_INTENT
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 class CancelandStopIntentHandler : RequestHandler, KoinComponent {
 

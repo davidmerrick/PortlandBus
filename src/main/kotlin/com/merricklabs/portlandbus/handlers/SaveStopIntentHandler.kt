@@ -10,7 +10,7 @@ import com.merricklabs.portlandbus.storage.MyStopStorage
 import com.merricklabs.portlandbus.util.SkillsHelper
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 class SaveStopIntentHandler : RequestHandler, KoinComponent {
 

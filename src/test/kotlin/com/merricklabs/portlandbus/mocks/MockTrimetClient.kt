@@ -6,7 +6,8 @@ import com.merricklabs.portlandbus.external.trimet.models.Arrival
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
-import java.util.*
+import java.util.Date
+import java.util.Random
 import java.util.stream.Collectors.toList
 import java.util.stream.IntStream
 

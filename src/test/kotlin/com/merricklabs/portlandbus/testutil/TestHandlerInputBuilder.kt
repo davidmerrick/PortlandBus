@@ -1,7 +1,12 @@
 package com.merricklabs.portlandbus.testutil
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
-import com.amazon.ask.model.*
+import com.amazon.ask.model.Intent
+import com.amazon.ask.model.IntentRequest
+import com.amazon.ask.model.RequestEnvelope
+import com.amazon.ask.model.Session
+import com.amazon.ask.model.Slot
+import com.amazon.ask.model.User
 
 /**
  * Helper class for building intent inputs

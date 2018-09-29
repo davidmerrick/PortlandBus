@@ -8,7 +8,7 @@ import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.FALLBACK_INTENT
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 // 2018-July-09: AMAZON.FallackIntent is only currently available in en-US locale.
 //              This handler will not be triggered except in that locale, so it can be

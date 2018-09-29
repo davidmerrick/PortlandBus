@@ -21,7 +21,7 @@ import com.amazon.ask.request.Predicates.requestType
 import com.merricklabs.portlandbus.PortlandBusConfig
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.Optional
 
 class LaunchRequestHandler : RequestHandler, KoinComponent {
 

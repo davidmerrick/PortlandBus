@@ -9,7 +9,7 @@ import com.merricklabs.portlandbus.PortlandBusConfig
 import mu.KotlinLogging
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
-import java.util.*
+import java.util.OptionalInt
 
 private val log = KotlinLogging.logger {}
 
