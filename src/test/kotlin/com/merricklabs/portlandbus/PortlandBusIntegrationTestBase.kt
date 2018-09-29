@@ -1,29 +1,28 @@
 package com.merricklabs.portlandbus
 
-import com.merricklabs.portlandbus.mocks.MockMyStopStorage
-import com.merricklabs.portlandbus.mocks.MockTrimetClient
+import com.merricklabs.portlandbus.external.trimet.TrimetClient
 import com.merricklabs.portlandbus.testutil.TestConstants.INTEGRATION_GROUP
-import org.koin.standalone.StandAloneContext
+import org.koin.standalone.StandAloneContext.loadKoinModules
+import org.koin.standalone.StandAloneContext.stopKoin
+import org.koin.standalone.inject
+import org.koin.test.KoinTest
+import org.koin.test.declareMock
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.BeforeClass
 
-open class PortlandBusIntegrationTestBase {
+open class PortlandBusIntegrationTestBase : KoinTest {
 
-    var config: PortlandBusConfig? = null
+    val trimetClient: TrimetClient by inject()
+    val config: PortlandBusConfig by inject()
 
     @BeforeClass(groups = [INTEGRATION_GROUP])
     fun beforeClass() {
-        StandAloneContext.startKoin(listOf(PortlandBusTestModule))
-        config = PortlandBusConfig()
+        loadKoinModules(PortlandBusModule)
+        declareMock<TrimetClient>()
     }
 
     @AfterMethod(groups = [INTEGRATION_GROUP])
     fun afterMethod() {
-        resetMocks()
-    }
-
-    private fun resetMocks() {
-        MockTrimetClient().reset()
-        MockMyStopStorage().reset()
+        stopKoin()
     }
 }

@@ -6,19 +6,23 @@ import com.amazon.ask.model.SlotConfirmationStatus
 import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.PortlandBusIntegrationTestBase
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INTENT
-import com.merricklabs.portlandbus.mocks.MockTrimetClient
+import com.merricklabs.portlandbus.mocks.MockTrimetUtils
 import com.merricklabs.portlandbus.testutil.TestConstants.INTEGRATION_GROUP
 import com.merricklabs.portlandbus.testutil.TestData.STOP_ID
 import com.merricklabs.portlandbus.testutil.TestData.USER_ID
 import com.merricklabs.portlandbus.testutil.TestHandlerInput
+import org.koin.standalone.inject
+import org.mockito.Mockito
 import org.testng.Assert.assertTrue
 import org.testng.annotations.Test
 
 class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
 
+    private val getArrivalsIntentHandler: GetArrivalsIntentHandler by inject()
+
     private val invalidInput: HandlerInput
         get() {
-            val alexaConfig = config!!.alexa
+            val alexaConfig = config.alexa
             return TestHandlerInput.Builder()
                     .slots(buildSlots("", alexaConfig))
                     .userId(USER_ID)
@@ -28,16 +32,11 @@ class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
         }
 
     @Test(groups = [INTEGRATION_GROUP])
-    fun getNextArrivals() {
-        // Initialize mock trimet client
-        val dummyArrivals = MockTrimetClient.getDummyArrivals(STOP_ID, 5)
-        val mockTrimetClient = MockTrimetClient()
-        mockTrimetClient.arrivals = dummyArrivals
-
+    fun `get next arrivals`() {
+        Mockito.`when`(trimetClient.getArrivalsForStop(STOP_ID)).thenReturn(MockTrimetUtils.getDummyArrivals(STOP_ID, 5))
         val input = getValidInput(STOP_ID)
-        val handler = GetArrivalsIntentHandler()
-        val responseOptional = handler.handle(input)
-        assertTrue(responseOptional.isPresent())
+        val responseOptional = getArrivalsIntentHandler.handle(input)
+        assertTrue(responseOptional.isPresent)
         val speechText = responseOptional.get().getOutputSpeech().toString()
         assertTrue(speechText.contains("Next arrivals at stop"))
         assertTrue(speechText.contains(STOP_ID.toString()))
@@ -45,17 +44,16 @@ class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
     }
 
     @Test(groups = [INTEGRATION_GROUP])
-    fun testWithInvalidInput() {
+    fun `test with invalid input`() {
         val input = invalidInput
-        val handler = GetArrivalsIntentHandler()
-        val responseOptional = handler.handle(input)
+        val responseOptional = getArrivalsIntentHandler.handle(input)
         assertTrue(responseOptional.isPresent)
         val speechText = responseOptional.get().outputSpeech.toString()
         assertTrue(speechText.contains("Sorry, there was a problem getting arrivals for that stop."))
     }
 
     private fun getValidInput(stopId: Int): HandlerInput {
-        val alexaConfig = config!!.alexa
+        val alexaConfig = config.alexa
         return TestHandlerInput.Builder()
                 .slots(buildSlots(stopId.toString(), alexaConfig))
                 .userId(USER_ID)
