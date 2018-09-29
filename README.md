@@ -27,4 +27,4 @@ Set the following environment variables:
 
 # Running locally
 
-Use https://github.com/localstack/localstack to mock out the DynamoDB endpoints.
+Use [localstack](https://github.com/localstack/localstack) to mock out the DynamoDB endpoints.
