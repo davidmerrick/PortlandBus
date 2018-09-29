@@ -4,9 +4,6 @@ Alexa skill to fetch TriMet arrivals, written in Kotlin.
 
 You can try out the live skill [here](https://www.amazon.com/David-Merrick-Portland-Bus/dp/B01NB9LCZK/ref=sr_1_1?ie=UTF8&qid=1538191917&sr=8-1&keywords=portland+bus).
 
-# Based on:
-- https://alexa-skills-kit-sdk-for-java.readthedocs.io/en/latest/Developing-Your-First-Skill.html
-
 # Usage
 
 In the Lambda's handler field, set the handler to: 
@@ -21,6 +18,10 @@ Set the following environment variables:
 - `DYNAMODB_TABLE`: DynamoDB table.
 - `TRIMET_APP_ID`: API key for accessing TriMet. Get one [here](https://developer.trimet.org/).
 - `INVOCATION_NAME`: Name used to invoke your skill. Mine is "Portland Bus." 
+
+# Reference
+
+[This guide](https://alexa-skills-kit-sdk-for-java.readthedocs.io/en/latest/Developing-Your-First-Skill.html) was very helpful in getting up to speed on writing an Alexa skill in Java. I subsequently rewrote it in Kotlin.
 
 # Running locally
 
