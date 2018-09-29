@@ -3,19 +3,18 @@ package com.merricklabs.portlandbus.models
 import com.merricklabs.portlandbus.external.trimet.models.Arrival
 import java.time.LocalDateTime
 
-import java.util.stream.Collectors.toList
-
 class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
 
     private val arrivalPronouncers: List<ArrivalPronouncer>
 
     init {
         // Filter out arrivals that are in the past and below a time threshold
-        this.arrivalPronouncers = arrivals.stream()
+        this.arrivalPronouncers = arrivals
+                .asSequence()
                 .filter { it.time.isAfter(now) }
                 .filter { it.getMinutesRemaining(now) < MAX_ARRIVAL_MINUTES }
                 .map { ArrivalPronouncer(it) }
-                .collect(toList())
+                .toList()
     }
 
     private fun pronounceStop(): String {
@@ -35,7 +34,6 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
             speechBuilder.append(arrivalPronouncers[0].pronounceForMultipleArrival(now))
         } else {
             arrivalPronouncers.subList(0, arrivalPronouncers.size - 1)
-                    .stream()
                     .forEach { speechBuilder.append("${it.pronounceForMultipleArrival(now)}, ") }
 
             speechBuilder.append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now)}.")

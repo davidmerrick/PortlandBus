@@ -58,13 +58,11 @@ class SaveStopIntentHandlerTest : PortlandBusIntegrationTestBase() {
     }
 
     private fun buildSlots(stopIdString: String, alexaConfig: PortlandBusConfig.Alexa): Map<String, Slot> {
-        return mapOf(Pair(
-                alexaConfig.stopIdSlot,
+        return mapOf(alexaConfig.stopIdSlot to
                 Slot.builder()
                         .withName(alexaConfig.stopIdSlot)
                         .withConfirmationStatus(SlotConfirmationStatus.NONE)
                         .withValue(stopIdString)
-                        .build()
-        ))
+                        .build())
     }
 }

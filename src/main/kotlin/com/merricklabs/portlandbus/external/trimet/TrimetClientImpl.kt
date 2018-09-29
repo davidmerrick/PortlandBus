@@ -11,7 +11,6 @@ import okhttp3.Request
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.io.IOException
-import java.util.stream.Collectors.toList
 
 private val log = KotlinLogging.logger {}
 
@@ -20,12 +19,10 @@ class TrimetClientImpl : TrimetClient, KoinComponent {
     val config by inject<PortlandBusConfig>()
 
     override fun getArrivalsForStop(stopId: Int): List<Arrival> {
-        val trimetConfig = config.trimet
-
-        val url = HttpUrl.parse(trimetConfig.arrivalsEndpoint)!!.newBuilder()
+        val url = HttpUrl.parse(config.trimet.arrivalsEndpoint)!!.newBuilder()
                 .addQueryParameter("locIDs", stopId.toString())
                 .addQueryParameter("json", "true")
-                .addQueryParameter("appID", trimetConfig.appId)
+                .addQueryParameter("appID", config.trimet.appId)
                 .build()
                 .toString()
 
@@ -38,9 +35,9 @@ class TrimetClientImpl : TrimetClient, KoinComponent {
             log.info { "Success: fetched ${results.resultSet.arrivals.size} arrivals from the TriMet API" }
             return results.resultSet
                     .arrivals
-                    .stream()
+                    .asSequence()
                     .filter { it.stopId == stopId }
-                    .collect(toList())
+                    .toList()
         } catch (e: IOException) {
             log.error(e.message, e)
             throw RuntimeException(e)
