@@ -1,4 +1,4 @@
-package com.merricklabs.portlandbus.mocks
+package com.merricklabs.portlandbus.testutil
 
 
 import com.merricklabs.portlandbus.external.trimet.models.Arrival

@@ -6,7 +6,7 @@ import com.amazon.ask.model.SlotConfirmationStatus
 import com.merricklabs.portlandbus.PortlandBusConfig
 import com.merricklabs.portlandbus.PortlandBusIntegrationTestBase
 import com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INTENT
-import com.merricklabs.portlandbus.mocks.MockTrimetUtils
+import com.merricklabs.portlandbus.testutil.MockTrimetUtils
 import com.merricklabs.portlandbus.testutil.TestConstants.INTEGRATION_GROUP
 import com.merricklabs.portlandbus.testutil.TestData.STOP_ID
 import com.merricklabs.portlandbus.testutil.TestData.USER_ID
@@ -19,17 +19,6 @@ import org.testng.annotations.Test
 class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
 
     private val getArrivalsIntentHandler: GetArrivalsIntentHandler by inject()
-
-    private val invalidInput: HandlerInput
-        get() {
-            val alexaConfig = config.alexa
-            return TestHandlerInput.Builder()
-                    .slots(buildSlots("", alexaConfig))
-                    .userId(USER_ID)
-                    .intentName(GET_ARRIVALS_INTENT)
-                    .build()
-                    .handlerInput
-        }
 
     @Test(groups = [INTEGRATION_GROUP])
     fun `get next arrivals`() {
@@ -72,4 +61,15 @@ class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
                         .build()
         ))
     }
+
+    private val invalidInput: HandlerInput
+        get() {
+            val alexaConfig = config.alexa
+            return TestHandlerInput.Builder()
+                    .slots(buildSlots("", alexaConfig))
+                    .userId(USER_ID)
+                    .intentName(GET_ARRIVALS_INTENT)
+                    .build()
+                    .handlerInput
+        }
 }
