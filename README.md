@@ -14,10 +14,10 @@ com.merricklabs.portlandbus.PortlandBusStreamHandler
 Set the following environment variables:
 - `SKILL_ID`: Your Alexa skill's id.
 - `DYNAMODB_ENDPOINT`: Endpoint for DynamoDB. For example, in the Oregon region I'm using, it's https://dynamodb.us-west-2.amazonaws.com.
-- `DYNAMODB_REGION`: Region for DynamoDB. For example, "us-west-2".
+- `DYNAMODB_REGION`: Region for DynamoDB. For example, `us-west-2`.
 - `DYNAMODB_TABLE`: DynamoDB table.
 - `TRIMET_APP_ID`: API key for accessing TriMet. Get one [here](https://developer.trimet.org/).
-- `INVOCATION_NAME`: Name used to invoke your skill. Mine is "Portland Bus." 
+- `INVOCATION_NAME`: Name used to invoke your skill. Mine is `Portland Bus`. 
 
 # Reference
 
