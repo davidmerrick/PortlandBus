@@ -21,6 +21,10 @@ Set the following environment variables:
 - `TRIMET_APP_ID`: API key for accessing TriMet. Get one [here](https://developer.trimet.org/).
 - `INVOCATION_NAME`: Name used to invoke your skill. Mine is `Portland Bus`. 
 
+## Recommended settings
+- 512 MB of memory is plenty.
+- Timeout of 5s seems to work well and eliminate any DynamoDB calls prematurely timing out.
+
 # Reference
 
 [This guide](https://alexa-skills-kit-sdk-for-java.readthedocs.io/en/latest/Developing-Your-First-Skill.html) was very helpful in getting up to speed on writing an Alexa skill in Java. I subsequently rewrote it in Kotlin.
