@@ -29,11 +29,11 @@ class SaveStopIntentHandler : RequestHandler, KoinComponent {
         }
         val stopId = stopIdOptional.asInt
         val userId = input.requestEnvelope.session.user.userId
-        try {
+        return try {
             storage.saveStop(userId, stopId)
-            return skillsHelper.savedStopResponse(input, stopId)
+            skillsHelper.savedStopResponse(input, stopId)
         } catch (e: Exception) {
-            return skillsHelper.errorSavingStop(input, stopId)
+            skillsHelper.errorSavingStop(input, stopId)
         }
     }
 
