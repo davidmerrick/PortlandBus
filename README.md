@@ -1,4 +1,6 @@
-Alexa skill to fetch TriMet arrivals, written in Kotlin.
+# tl;dr
+
+Alexa skill, written in Kotlin, to fetch TriMet arrivals for bus times in Portland, OR.
 
 # Try it out
 
