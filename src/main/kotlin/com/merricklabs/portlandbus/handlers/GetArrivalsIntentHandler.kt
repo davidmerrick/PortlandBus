@@ -9,12 +9,10 @@ import com.merricklabs.portlandbus.constants.PortlandBusIntents.GET_ARRIVALS_INT
 import com.merricklabs.portlandbus.external.trimet.TrimetClient
 import com.merricklabs.portlandbus.models.ArrivalListPronouncer
 import com.merricklabs.portlandbus.util.SkillsHelper
-import lombok.extern.slf4j.Slf4j
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.util.*
 
-@Slf4j
 class GetArrivalsIntentHandler : RequestHandler, KoinComponent {
 
     private val config by inject<PortlandBusConfig>()
