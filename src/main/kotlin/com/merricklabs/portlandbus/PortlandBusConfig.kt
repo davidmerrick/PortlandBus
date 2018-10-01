@@ -15,7 +15,7 @@ class PortlandBusConfig : KoinComponent {
 
     inner class Alexa {
         val skillId: String = System.getenv("SKILL_ID")
-        val invocationName: String = System.getenv("INVOCATION_NAME")
+        val invocationName: String = System.getenv("INVOCATION_NAME") ?: "Portland Bus"
         val stopIdSlot = "stopId"
     }
 

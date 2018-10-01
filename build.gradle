@@ -51,6 +51,10 @@ test {
     useTestNG {
         options.includeGroups 'integration'
     }
+
+    environment "TRIMET_APP_ID", "none"
+    environment "SKILL_ID", "none"
+    environment "DYNAMODB_TABLE", "none"
 }
 
 compileKotlin {
