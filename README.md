@@ -23,7 +23,7 @@ Set the following environment variables:
 
 ## Recommended settings
 - 512 MB of memory is plenty.
-- Timeout of 5s seems to work well and eliminate any DynamoDB calls prematurely timing out.
+- Timeout of 10s seems to work well and eliminate any DynamoDB calls prematurely timing out. Sometimes those are slow initially.
 
 # Reference
 

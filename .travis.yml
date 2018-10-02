@@ -18,7 +18,7 @@ deploy:
     handler_name: PortlandBusStreamHandler
     zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus.zip"
     memory_size: 512
-    timeout: 5
+    timeout: 10
     on:
       branch: prd
   - provider: lambda
@@ -31,7 +31,7 @@ deploy:
     handler_name: PortlandBusStreamHandler
     zip: "${TRAVIS_BUILD_DIR}/build/distributions/PortlandBus.zip"
     memory_size: 512
-    timeout: 5
+    timeout: 10
     on:
       branch: stg
 
