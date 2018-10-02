@@ -22,8 +22,6 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
     }
 
     fun pronounceArrivals(): String {
-        val now = LocalDateTime.now()
-
         if (arrivalPronouncers.isEmpty()) {
             return "No arrivals are currently scheduled for stop ${pronounceStop()} in the next $MAX_ARRIVAL_MINUTES minutes."
         }
@@ -31,11 +29,11 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
         return buildString {
             append("Next arrivals at stop ${pronounceStop()}: ")
             if (arrivalPronouncers.size == 1) {
-                append(arrivalPronouncers[0].pronounceForMultipleArrival(now))
+                append(arrivalPronouncers[0].pronounceForMultipleArrival())
             } else {
                 arrivalPronouncers.subList(0, arrivalPronouncers.size - 1)
-                        .forEach { append("${it.pronounceForMultipleArrival(now)}, ") }
-                append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival(now)}.")
+                        .forEach { append("${it.pronounceForMultipleArrival()}, ") }
+                append("and ${arrivalPronouncers[arrivalPronouncers.size - 1].pronounceForMultipleArrival()}.")
             }
         }
     }
@@ -51,7 +49,7 @@ class ArrivalListPronouncer(private val stopId: Int, arrivals: List<Arrival>) {
                 append("No arrivals")
             } else {
                 arrivalPronouncers
-                        .forEach { append("${it.showNextArrival(now)}\n") }
+                        .forEach { append("${it.showNextArrival()}\n") }
             }
         }
     }

@@ -8,28 +8,12 @@ import java.time.LocalDateTime
  * Separates arrival data from presentation data.
  */
 class ArrivalPronouncer(private val arrival: Arrival) {
-    private var minutesRemainingCache: Long? = null
+    private val minutesRemaining by lazy { arrival.getMinutesRemaining(LocalDateTime.now()) }
 
     private fun getMinutePronunciation(duration: Long): String {
         return if (duration == 1L) {
             "minute"
         } else "minutes"
-
-    }
-
-    /**
-     * Cache the result of minutes remaining calculation, so display is consistent between the show results
-     * and the spoken ones.
-     *
-     * @param now
-     * @return
-     */
-    private fun getMinutesRemainingCache(now: LocalDateTime): Long {
-        if (minutesRemainingCache == null) {
-            minutesRemainingCache = arrival.getMinutesRemaining(now)
-        }
-
-        return minutesRemainingCache!!
     }
 
     /**
@@ -37,13 +21,12 @@ class ArrivalPronouncer(private val arrival: Arrival) {
      * @param now
      * @return
      */
-    fun pronounceForMultipleArrival(now: LocalDateTime): String {
-        val minutesRemaining = getMinutesRemainingCache(now)
+    fun pronounceForMultipleArrival(): String {
         return "bus ${arrival.busId} in $minutesRemaining ${getMinutePronunciation(minutesRemaining)}"
     }
 
-    fun showNextArrival(now: LocalDateTime): String {
-        val minutesRemaining = getMinutesRemainingCache(now)
+    fun showNextArrival(): String {
+        val minutesRemaining = minutesRemaining
         return "Bus ${arrival.busId}: $minutesRemaining min"
     }
 }
