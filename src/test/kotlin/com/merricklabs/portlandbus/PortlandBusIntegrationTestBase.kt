@@ -27,7 +27,7 @@ open class PortlandBusIntegrationTestBase : KoinTest {
     val config: PortlandBusConfig by inject()
 
     @BeforeMethod(groups = [INTEGRATION_GROUP])
-    fun beforeClass() {
+    fun beforeMethod() {
         loadKoinModules(PortlandBusModule)
         declareMock<TrimetClient>()
         declareMock<MyStopStorage>()

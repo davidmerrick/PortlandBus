@@ -24,7 +24,7 @@ class SaveStopIntentHandlerTest : PortlandBusIntegrationTestBase() {
         val responseOptional = saveStopIntentHandler.handle(input)
         assertTrue(responseOptional.isPresent)
 
-        val speechText = responseOptional.get().getOutputSpeech().toString()
+        val speechText = responseOptional.get().outputSpeech.toString()
         assertTrue(speechText.contains("Saved stop"))
         assertTrue(speechText.contains(STOP_ID.toString()))
     }

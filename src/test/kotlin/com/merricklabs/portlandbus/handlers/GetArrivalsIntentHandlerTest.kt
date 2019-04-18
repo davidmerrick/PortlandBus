@@ -26,7 +26,7 @@ class GetArrivalsIntentHandlerTest : PortlandBusIntegrationTestBase() {
         val input = getValidInput(STOP_ID)
         val responseOptional = getArrivalsIntentHandler.handle(input)
         assertTrue(responseOptional.isPresent)
-        val speechText = responseOptional.get().getOutputSpeech().toString()
+        val speechText = responseOptional.get().outputSpeech.toString()
         assertTrue(speechText.contains("Next arrivals at stop"))
         assertTrue(speechText.contains(STOP_ID.toString()))
         assertTrue(speechText.contains(", and bus"))
