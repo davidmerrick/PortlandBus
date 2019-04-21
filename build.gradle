@@ -23,7 +23,9 @@ dependencies {
             'com.amazon.alexa:ask-sdk:2.4.1',
             'com.squareup.okhttp3:okhttp:3.11.0',
             'org.koin:koin-core:1.0.1',
-            'io.github.microutils:kotlin-logging:1.6.10'
+            'io.github.microutils:kotlin-logging:1.6.10',
+            "org.slf4j:slf4j-api:1.7.26",
+            "org.slf4j:slf4j-jdk14:1.7.26",
     )
 
     testCompile(
